@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple TODO</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body ng-app="App" ng-controller="padrao" >
+        <div class="container" >
+            <div class="row well mtop">
+                <div class="col-sm-9" >
+                    <input type="text" ng-model="nome" class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <input type="button" value="Cadastrar" ng-click="adicionar()" class="form-control btn btn-default" />
+                </div>
+            </div>
+            
+            <div class="row" ng-repeat="item in lista">
+                <div class="col-sm-8">
+                    <input type="text" ng-model="item.descricao" class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input type="button" value="Editar" ng-click="editar(item)" class="form-control btn btn-primary" />
+                </div>
+                <div class="col-sm-2">
+                    <input type="button" value="Remover" ng-click="remover($index)" class="form-control btn btn-danger" />
+                </div>
+            </div>
+            
+        </div>
+
+    </body>
+</html>
