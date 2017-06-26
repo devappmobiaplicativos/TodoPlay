@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/opt/lampp/htdocs/teste/backend/conf/routes
-// @DATE:Sat Jun 10 07:48:36 BRT 2017
+// @SOURCE:C:/Users/danie/Documents/GitHub/TodoPlay/conf/routes
+// @DATE:Wed Jun 21 14:56:50 BRT 2017
 
 
 package router {

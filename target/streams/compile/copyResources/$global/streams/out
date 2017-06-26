@@ -1,4 +1,4 @@
 [0m[[0mdebug[0m] [0mCopy resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(/opt/lampp/htdocs/teste/backend/conf/logback.xml,/opt/lampp/htdocs/teste/backend/target/scala-2.11/classes/logback.xml)[0m
-[0m[[0mdebug[0m] [0m	(/opt/lampp/htdocs/teste/backend/conf/application.conf,/opt/lampp/htdocs/teste/backend/target/scala-2.11/classes/application.conf)[0m
-[0m[[0mdebug[0m] [0m	(/opt/lampp/htdocs/teste/backend/conf/routes,/opt/lampp/htdocs/teste/backend/target/scala-2.11/classes/routes)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\danie\Documents\GitHub\TodoPlay\conf\application.conf,C:\Users\danie\Documents\GitHub\TodoPlay\target\scala-2.11\classes\application.conf)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\danie\Documents\GitHub\TodoPlay\conf\logback.xml,C:\Users\danie\Documents\GitHub\TodoPlay\target\scala-2.11\classes\logback.xml)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\danie\Documents\GitHub\TodoPlay\conf\routes,C:\Users\danie\Documents\GitHub\TodoPlay\target\scala-2.11\classes\routes)[0m

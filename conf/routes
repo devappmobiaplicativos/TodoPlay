@@ -3,7 +3,7 @@
 # ~~~~
 
 # An example controller showing a sample home page
-#GET     /                           controllers.HomeController.index
+GET     /                           controllers.Assets.at(path="/public", file="/index.html")
 # An example controller showing how to use dependency injection
 #GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
@@ -12,7 +12,10 @@
 
 GET     /api/itens          controllers.Itens.index()
 POST     /api/itens          controllers.Itens.insert()
-POST     /api/itens/edit          controllers.Itens.edit()
+PUT     /api/itens          controllers.Itens.edit()
+DELETE     /api/itens/:id          controllers.Itens.delete(id)
+
+PUT     /api/itens/concluir/:id/:pronto          controllers.Itens.concluir(id:String, pronto:Boolean)
 
 
 # Map static resources from the /public folder to the /assets URL path

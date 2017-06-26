@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/opt/lampp/htdocs/teste/backend/conf/routes
-// @DATE:Sat Jun 10 07:48:36 BRT 2017
+// @SOURCE:C:/Users/danie/Documents/GitHub/TodoPlay/conf/routes
+// @DATE:Wed Jun 21 14:56:50 BRT 2017
 
 import play.api.routing.JavaScriptReverseRoute
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
@@ -11,7 +11,7 @@ import play.core.routing.{ HandlerDef, ReverseRouteContext, queryString, dynamic
 import _root_.controllers.Assets.Asset
 import _root_.play.libs.F
 
-// @LINE:13
+// @LINE:6
 package controllers.javascript {
   import ReverseRouteContext.empty
 
@@ -22,6 +22,46 @@ package controllers.javascript {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
+  
+    // @LINE:15
+    def edit: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Itens.edit",
+      """
+        function() {
+          return _wA({method:"PUT", url:"""" + _prefix + { _defaultPrefix } + """" + "api/itens"})
+        }
+      """
+    )
+  
+    // @LINE:14
+    def insert: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Itens.insert",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "api/itens"})
+        }
+      """
+    )
+  
+    // @LINE:16
+    def delete: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Itens.delete",
+      """
+        function(id0) {
+          return _wA({method:"DELETE", url:"""" + _prefix + { _defaultPrefix } + """" + "api/itens/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("id", encodeURIComponent(id0))})
+        }
+      """
+    )
+  
+    // @LINE:18
+    def concluir: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Itens.concluir",
+      """
+        function(id0,pronto1) {
+          return _wA({method:"PUT", url:"""" + _prefix + { _defaultPrefix } + """" + "api/itens/concluir/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("id", encodeURIComponent(id0)) + "/" + (""" + implicitly[PathBindable[Boolean]].javascriptUnbind + """)("pronto", pronto1)})
+        }
+      """
+    )
   
     // @LINE:13
     def index: JavaScriptReverseRoute = JavaScriptReverseRoute(
@@ -35,7 +75,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:16
+  // @LINE:6
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -43,7 +83,17 @@ package controllers.javascript {
     }
 
   
-    // @LINE:16
+    // @LINE:6
+    def at: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.Assets.at",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + """"})
+        }
+      """
+    )
+  
+    // @LINE:22
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """

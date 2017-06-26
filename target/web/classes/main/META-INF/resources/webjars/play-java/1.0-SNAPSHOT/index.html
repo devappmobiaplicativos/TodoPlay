@@ -24,14 +24,17 @@
             </div>
             
             <div class="row" ng-repeat="item in lista">
-                <div class="col-sm-8">
+                <div class="col-sm-1">
+                    <input type="checkbox" ng-model="item.pronto" ng-click="concluirTarefa(item.id, item.pronto)" class="form-control" />
+                </div>
+                <div class="col-sm-7">
                     <input type="text" ng-model="item.descricao" class="form-control" />
                 </div>
                 <div class="col-sm-2">
                     <input type="button" value="Editar" ng-click="editar(item)" class="form-control btn btn-primary" />
                 </div>
                 <div class="col-sm-2">
-                    <input type="button" value="Remover" ng-click="remover($index)" class="form-control btn btn-danger" />
+                    <input type="button" value="Remover" ng-click="remover(item.id)" class="form-control btn btn-danger" />
                 </div>
             </div>
             

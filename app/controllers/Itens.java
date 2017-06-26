@@ -25,27 +25,35 @@ public class Itens extends Controller {
         return ok((JsonNode)new Item(db).all());
     }
     
-    public Result delete() throws Exception {
+    public Result delete(String id) throws Exception {
         Item item = new Item(db);
-        item.id = request().body().asJson().asText("id");
+        item.id = id;
         item.delete();
         return ok();
     }
     
     public Result insert() throws Exception {
         Item item = new Item(db);
-        item.descricao = request().body().asJson().asText("descricao");
-        item.pronto = request().body().asJson().asText("pronto");
-        item.insert();
-        return ok();
+        item.descricao = request().body().asJson().get("descricao").asText();
+        item.pronto = request().body().asJson().get("pronto").asText();
+        item.id = item.insert();
+        return ok(item.id);
     }
     
     public Result edit() throws Exception {
         Item item = new Item(db);
-        item.descricao = request().body().asJson().asText("descricao");
-        item.pronto = request().body().asJson().asText("pronto");
-        item.id = request().body().asJson().asText("id");
+        item.id = request().body().asJson().get("id").asText();
+        item.descricao = request().body().asJson().get("descricao").asText();
+        item.pronto = request().body().asJson().get("pronto").asText();
         item.edit();
+        return ok();
+    }
+
+    public Result concluir(String id, boolean pronto) throws Exception {
+        Item item = new Item(db);
+        item.id = id;
+        item.pronto = String.valueOf(pronto);
+        item.concluir();
         return ok();
     }
 }

@@ -2,6 +2,7 @@ package models;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class Item {
             ResultSet rs = c.createStatement().executeQuery("select * from todo");
             while (rs.next()) {
                 HashMap<String, String> map = new HashMap<>();
-                for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                     map.put(rs.getMetaData().getColumnName(i), rs.getString(i));
                 }
                 lista.add(map);
@@ -61,14 +62,21 @@ public class Item {
         return Json.toJson(lista.get(0));
     }
 
-    public void insert() {
+    public String insert() throws Exception {
         try {
             Connection c = db.getConnection();
-            PreparedStatement ps = c.prepareStatement("insert into todo (descricao,pronto) values(?,?)");
+            String generatedColumns[] = { "ID" };
+            PreparedStatement ps = c.prepareStatement("insert into todo (descricao,pronto) values(?,?)", generatedColumns);
             ps.setString(1, this.descricao);
             ps.setString(2, this.pronto);
+
+            ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            id = rs.getString(1);
+            return id;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
     }
     
@@ -79,6 +87,21 @@ public class Item {
             ps.setString(1, this.descricao);
             ps.setString(2, this.pronto);
             ps.setString(3, this.id);
+
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void concluir() {
+        try {
+            Connection c = db.getConnection();
+            PreparedStatement ps = c.prepareStatement("update todo set pronto=? where id=?");
+            ps.setString(1, this.pronto);
+            ps.setString(2, this.id);
+
+            ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,9 +112,13 @@ public class Item {
             Connection c = db.getConnection();
             PreparedStatement ps = c.prepareStatement("delete from todo where id=?");
             ps.setString(1, this.id);
+
+            ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    
 
 }
