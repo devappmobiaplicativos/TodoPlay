@@ -28,7 +28,7 @@ public class Item {
             ResultSet rs = c.createStatement().executeQuery("select * from todo");
             while (rs.next()) {
                 HashMap<String, String> map = new HashMap<>();
-                for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                     map.put(rs.getMetaData().getColumnName(i), rs.getString(i));
                 }
                 lista.add(map);
@@ -48,7 +48,7 @@ public class Item {
             ResultSet rs = c.createStatement().executeQuery("select * from todo where id='" + id + "'");
             while (rs.next()) {
                 HashMap<String, String> map = new HashMap<>();
-                for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                     map.put(rs.getMetaData().getColumnName(i), rs.getString(i));
                 }
                 lista.add(map);
@@ -67,6 +67,7 @@ public class Item {
             PreparedStatement ps = c.prepareStatement("insert into todo (descricao,pronto) values(?,?)");
             ps.setString(1, this.descricao);
             ps.setString(2, this.pronto);
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,6 +80,7 @@ public class Item {
             ps.setString(1, this.descricao);
             ps.setString(2, this.pronto);
             ps.setString(3, this.id);
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,6 +91,7 @@ public class Item {
             Connection c = db.getConnection();
             PreparedStatement ps = c.prepareStatement("delete from todo where id=?");
             ps.setString(1, this.id);
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }

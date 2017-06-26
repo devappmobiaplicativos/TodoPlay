@@ -11,6 +11,7 @@ import play.*;
 import play.db.*;
 import play.mvc.*;
 import play.libs.Json;
+import java.util.*;
 
 public class Itens extends Controller {
 
@@ -24,27 +25,30 @@ public class Itens extends Controller {
     public Result index() throws Exception {
         return ok((JsonNode)new Item(db).all());
     }
-    
+
     public Result delete() throws Exception {
         Item item = new Item(db);
-        item.id = request().body().asJson().asText("id");
+        JsonNode body = request().body().asJson();
+        item.id = body.get("id").textValue();
         item.delete();
         return ok();
     }
-    
+
     public Result insert() throws Exception {
         Item item = new Item(db);
-        item.descricao = request().body().asJson().asText("descricao");
-        item.pronto = request().body().asJson().asText("pronto");
+        JsonNode body = request().body().asJson();
+        item.descricao = body.get("descricao").textValue();
+        item.pronto = body.get("pronto").textValue();
         item.insert();
         return ok();
     }
-    
+
     public Result edit() throws Exception {
         Item item = new Item(db);
-        item.descricao = request().body().asJson().asText("descricao");
-        item.pronto = request().body().asJson().asText("pronto");
-        item.id = request().body().asJson().asText("id");
+        JsonNode body = request().body().asJson();
+        item.descricao = body.get("descricao").textValue();
+        item.pronto = body.get("pronto").textValue();
+        item.id = body.get("id").textValue();
         item.edit();
         return ok();
     }

@@ -10,7 +10,13 @@
 #GET     /message                    controllers.AsyncController.message
 
 
-GET     /api/itens          controllers.Itens.index()
+GET     /api/itens                  controllers.Itens.index()
+POST    /api/itens                  controllers.Itens.insert()
+PUT     /api/itens                  controllers.Itens.edit()
+POST    /api/itens/delete           controllers.Itens.delete()
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file              controllers.Assets.versioned(path="/public", file: Asset)
+
+# forwards all non-asset requests to index page
+GET     /$path<.*>                 @controllers.Application.index(path)

@@ -1,0 +1,51 @@
+<head>
+    <style>
+        .page {
+            padding-left: 30px;
+            padding-top: 30px;
+        }
+    </style>
+</head>
+<div class="page">
+    <form role="form">
+        <div class="row">
+            <duv class="form-group col-lg-2">
+                <label for="idDescricao">Descrição: </label>
+                <input class="form-control" ng-model="descricao" id="idDescricao">
+            </duv>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-2">
+                <label for="idPronto">Pronto:</label>
+                <select class="form-control" id="idPronto" ng-model="pronto">
+                    <option>true</option>
+                    <option>false</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <duv class="form-group col-lg-2">
+                <button class="btn btn-success" ng-if="!editMode" ng-click="addItem()">Adicionar tarefa</button>
+                <button class="btn btn-primary" ng-if="editMode" ng-click="updateItem()">Editar tarefa</button>
+            </duv>
+        </div>
+    </form>
+
+    <table class="col-lg-2">
+        <tbody>
+            <tr>
+                <th>Nome</th>
+                <th>Pronto</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="item in itens track by $index">
+                <td>{{item.descricao}}</td>
+                <td>{{item.pronto}}</td>
+                <td>
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true" ng-click="updateMode(item, $index)"></span>
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="deleteItem(item)"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

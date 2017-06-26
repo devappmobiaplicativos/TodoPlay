@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/opt/lampp/htdocs/teste/backend/conf/routes
-// @DATE:Sat Jun 10 07:48:36 BRT 2017
+// @SOURCE:/Users/estevamgarcia/Desktop/Mobi/TodoPlay/conf/routes
+// @DATE:Mon Jun 26 02:29:39 BRT 2017
 
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
 import play.core.routing.{ HandlerDef, ReverseRouteContext, queryString, dynamicString }
@@ -20,6 +20,24 @@ package controllers {
     }
 
   
+    // @LINE:15
+    def edit(): Call = {
+      import ReverseRouteContext.empty
+      Call("PUT", _prefix + { _defaultPrefix } + "api/itens")
+    }
+  
+    // @LINE:14
+    def insert(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "api/itens")
+    }
+  
+    // @LINE:16
+    def delete(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "api/itens/delete")
+    }
+  
     // @LINE:13
     def index(): Call = {
       import ReverseRouteContext.empty
@@ -28,17 +46,32 @@ package controllers {
   
   }
 
-  // @LINE:16
+  // @LINE:19
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:16
+    // @LINE:19
     def versioned(file:Asset): Call = {
       implicit val _rrc = new ReverseRouteContext(Map(("path", "/public")))
-      Call("GET", _prefix + { _defaultPrefix } + implicitly[PathBindable[Asset]].unbind("file", file))
+      Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[PathBindable[Asset]].unbind("file", file))
+    }
+  
+  }
+
+  // @LINE:22
+  class ReverseApplication(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:22
+    def index(path:String): Call = {
+      import ReverseRouteContext.empty
+      Call("GET", _prefix + { _defaultPrefix } + implicitly[PathBindable[String]].unbind("path", path))
     }
   
   }
